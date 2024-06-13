@@ -1,3 +1,4 @@
+const path = require("path");
 const express = require("express");
 const auth = require("../middleware/auth");
 const adminAuth = require("../middleware/adminAuth");
@@ -7,7 +8,19 @@ const User = require("../model/user");
 
 // Route for static pages (assuming it's also in the public directory)
 router.get("/", (req, res) => {
-  res.sendFile("index.html");
+  res.sendFile(path.join(__dirname, "index.html"));
+});
+
+router.get("/about", (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', "about.html"));
+});
+
+router.get("/services", (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', "services.html"));
+});
+
+router.get("/contact", (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', "contact.html"));
 });
 
 // Router for pug pages
