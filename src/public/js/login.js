@@ -39,7 +39,7 @@ export const login = async (email, password) => {
     //     // const errorMessage = encodeURIComponent(e.response.data.error);
     //     // location.assign(`/error?message=${errorMessage}`);
     // } else {
-       showAlert("danger", `error: ${e.response.data.error}`);
+       showAlert("danger", e);
     // }
   }
 };
