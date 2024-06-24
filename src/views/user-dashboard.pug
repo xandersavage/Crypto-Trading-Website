@@ -64,7 +64,7 @@ main.main-content
           ul.navbar-nav.ms-auto.navbar-list.mb-2.mb-lg-0.align-items-center
             li.nav-item.dropdown
               a.nav-link.py-0.d-flex.align-items-center#navbarDropdown(href='#', role='button', data-bs-toggle='dropdown', aria-expanded='false')
-                img.img-fluid.avatar.avatar-50.avatar-rounded(src='../assets/images/avatars/01.png', alt='User-Profile')
+                img.img-fluid.avatar.avatar-50.avatar-rounded(src='/assets/images/avatars/01.png', alt='User-Profile')
                 .caption.ms-3
                   h6.mb-0.caption-title= `${user.firstName} ${user.lastName}`
                   p.mb-0.caption-sub-title= user.role
@@ -362,7 +362,7 @@ main.main-content
               .card-header.d-flex.flex-wrap.justify-content-between.align-items-center
                 .caption
                   h4.font-weight-bold.mb-2 Traders
-                  p.mb-0 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  //- p.mb-0 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                 //- .btn-group(role='group', aria-label='Basic checkbox toggle button group')
                 //-   input.btn-check#btncheck1(type='checkbox')
                 //-   label.btn.btn-sm.btn-secondary.active.rounded-start(for='btncheck1') Monthly
@@ -375,6 +375,7 @@ main.main-content
                   table.table.data-table.mb-0
                     thead
                       tr
+                        th(scope='col') Avatar
                         th(scope='col') Name
                         th(scope='col') Win Rate
                         th(scope='col') Profit Share
@@ -385,6 +386,9 @@ main.main-content
                     tbody
                       each trader, index in traders
                         tr.white-space-no-wrap
+                          td
+                            div
+                              img.img-fluid.avatar.avatar-30px.avatar-rounded(src=`${trader.avatar}`, alt='trader avatar', style='width: 70px; height: 70px; object-fit: cover;')
                           td= trader.name
                           td= trader.winRate
                           td= trader.profitShare
@@ -398,11 +402,29 @@ main.main-content
         .row
           .col-lg-12
             .card
-              //- .card-header
-              //-   .input-group.search-input
-              //-     input.form-control.form-control-lg(type='search', placeholder='Search BTS/ETH')
-              .card-body.d-flex.align-items-center.justify-content-center
-                img.img-fluid.p-0.w-75(src='/assets/images/coins/14.png', alt='img60')
+              .card-header.d-flex.justify-content-between.flex-wrap
+                .header-title
+                  h4.card-title Withdraw
+                  p.mb-0 You can request a withdrawal of funds from your account. Please ensure the withdrawal amount is greater than balance before submitting your request.
+                  p.mb-0
+                    | **Processing Time:** Withdrawal requests are processed within 1-3 business days.
+                    br
+                    | **Fees:** A small transaction fee may apply depending on your withdrawal method.
+                    br
+                    | **Verification:** For your security, withdrawals may require additional verification.
+              .card-body
+                .input-group.mb-4
+                  span.input-group-text#basic-addon3 Amount
+                  input.form-control.col-lg-8#withdrawInput(type='text', aria-label='Recipient\'s username', aria-describedby='basic-addon3')
+                .d-grid.grid-cols-1.gap-card.justify-content-between
+                  div
+                    button.btn.btn-primary.w-100#withdrawButton(type='button', data-user-id=user._id)
+                      svg(width='17', height='17', viewBox='0 0 17 17', fill='none', xmlns='http://www.w3.org/2000/svg')
+                        path(d='M8.74074 8.25926L2 6.7037L16 1M8.74074 8.25926L10.8148 15L16 1M8.74074 8.25926L16 1', stroke='white')
+                      span.ms-2 Request Withdrawal
+              .card-footer.text-muted
+                p.mb-0 Please note: Before clicking "Request Withdrawal" button ensure withdrawal amount is greater than the balance.
+
           .col-lg-12
             .card
               .card-header
@@ -456,7 +478,10 @@ main.main-content
                   div
                     img.img-fluid.avatar.avatar-30px.avatar-rounded(src='/assets/images/avatars/06.png', alt='img40')
                 .input-group.mb-4
-                  span.input-group-text#basic-addon3 Wallet Address
+                  span.input-group-text#basic-addon3 USDT Wallet
+                  input.form-control.col-lg-8(type='text', value='hgfjhgghfut6t86656443rtdryrdytdh', aria-label='Recipient\'s username', aria-describedby='basic-addon3')
+                .input-group.mb-4
+                  span.input-group-text#basic-addon3 BTC Wallet
                   input.form-control.col-lg-8(type='text', value='hgfjhgghfut6t86656443rtdryrdytdh', aria-label='Recipient\'s username', aria-describedby='basic-addon3')
                 .d-grid.grid-cols-1.gap-card.justify-content-between
                   div

@@ -49,26 +49,32 @@ export const deleteTrader = async (traderId) => {
   }
 };
 
-export const addNewTrader = async (name, winRate, profitShare) => {
+export const addNewTrader = async (name, winRate, profitShare, avatarFile) => {
   try {
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('winRate', winRate);
+    formData.append('profitShare', profitShare);
+    formData.append('avatar', avatarFile); // Make sure to append the file
+
     const res = await axios({
       method: 'POST',
       url: '/traders',
-      data: {
-        name,
-        winRate,
-        profitShare
+      data: formData,
+      headers: {
+        'Content-Type': 'multipart/form-data'
       }
-    })
+    });
 
     if (res.status == 201) {
-      showAlert('success', 'Trader Created Successfully')
+      showAlert('success', 'Trader Created Successfully');
       window.setTimeout(() => {
-        location.reload(true)
-      }, 2000)
+        location.reload(true);
+      }, 2000);
     }
   } catch (e) {
-    showAlert('danger', `error adding trader: ${e}`)
-
+    console.log(e);
+    showAlert('danger', `error adding trader: ${e.response?.data?.error || e.message}`);
   }
-}
+};
+

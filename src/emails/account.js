@@ -11,7 +11,7 @@ const sendEmail = (to, subject, text) => {
       {
         From: {
           Email: "swankylex@gmail.com",
-          Name: "Crypto"
+          Name: "CoinBlazers"
         },
         To: [
           {
@@ -44,7 +44,7 @@ const generateSupportEmail = (userFirstName, userLastName, userEmail) => {
     Thank you.
 
     Best regards,
-    Crypto
+    CoinBlazers
   `;
 };
 
@@ -59,8 +59,38 @@ const generateUserEmail = (userFirstName, userLastName) => {
     Thank you for your patience.
 
     Best regards,
-    Crypto
+    CoinBlazers
   `;
 };
 
-module.exports = { sendEmail, generateSupportEmail, generateUserEmail };
+const generateUserWithdrawalEmail = (userFirstName, userLastName, amount) => {
+  return `
+    Dear ${userFirstName} ${userLastName},
+
+    We have received your withdrawal request of $${amount}. Your request is currently being processed.
+
+    We will notify you once the withdrawal has been completed and the amount has been transferred to your account.
+
+    Thank you for your patience.
+
+    Best regards,
+    CoinBlazers
+  `;
+};
+
+const generateAdminWithdrawalEmail = (userFirstName, userLastName, amount) => {
+  return `
+    Withdrawal Request Notification
+
+    User: ${userFirstName} ${userLastName}
+    Amount: $${amount}
+
+    The user has requested a withdrawal of $${amount}. Please process this request at your earliest convenience.
+
+    Best regards,
+    CoinBlazers System
+  `;
+};
+
+
+module.exports = { sendEmail, generateSupportEmail, generateUserEmail, generateAdminWithdrawalEmail, generateUserWithdrawalEmail };

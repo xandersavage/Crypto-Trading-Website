@@ -2,7 +2,7 @@ const express = require("express");
 const User = require("../model/user");
 const auth = require("../middleware/auth");
 const adminAuth = require("../middleware/adminAuth");
-// const { sendWelcomeEmail } = require("../emails/account");
+const { sendEmail, generateUserWithdrawalEmail, generateAdminWithdrawalEmail } = require('../emails/account')
 const router = express.Router();
 
 //GET ALL USERS
@@ -54,9 +54,9 @@ router.post("/users/login", async (req, res) => {
       req.body.password
     );
     // Check if the user's account is frozen
-    if (user.isFrozen) {
-      return res.status(403).json({ error: 'Your account is frozen. Please contact support.' });
-    }
+    // if (user.isFrozen) {
+    //   return res.status(403).json({ error: 'Your account is frozen. Please contact support.' });
+    // }
 
     const token = await user.generateAuthToken();
 
@@ -185,6 +185,43 @@ router.post("/users/logoutAll", auth, async (req, res) => {
     res.status(200).send();
   } catch (e) {
     res.status(500);
+  }
+});
+
+// WITHDRAW MONEY
+router.post('/withdraw', auth, async (req, res) => {
+  try {
+    const { amount, userId } = req.body;
+    // const userId = req.user._id;
+
+    if (!amount || isNaN(amount) || amount <= 0) {
+      return res.status(400).send({ error: 'Invalid amount' });
+    }
+
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).send({ error: 'User not found' });
+    }
+
+    if (user.balance < amount) {
+      return res.status(400).send({ error: 'Insufficient funds' });
+    }
+
+    // Deduct the amount from user's balance
+    user.balance -= amount;
+    await user.save();
+
+    // Send email notification to admin
+    const userMessage = generateUserWithdrawalEmail(user.firstName, user.lastName, amount);
+    const adminMessage = generateAdminWithdrawalEmail(user.firstName, user.lastName, amount);
+
+    await sendEmail(user.email, "Withdrawal Received and Processing", userMessage); //user email
+    await sendEmail("xanderarts99@gmail.com", "User Withdrawal Notification", adminMessage); // support email
+
+    res.status(200).send({ message: 'Withdrawal successful' });
+  } catch (error) {
+    res.status(500).send({ error: error.message });
   }
 });
 

@@ -12,6 +12,10 @@ const traderSchema = new mongoose.Schema({
   profitShare: {
     type: Number,
     required: true
+  },
+  avatar: {
+    type: String,
+    required: true
   }
 });
 

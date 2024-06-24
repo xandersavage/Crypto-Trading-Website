@@ -5,6 +5,8 @@ import { addSelectedTrader, removeSelectedTrader, addNewTrader, deleteTrader } f
 import { sendEmail } from "./email";
 import { getLivePrices } from './prices.js';
 import { getCryptoNews } from './news.js';
+import { accountFrozenModal } from './alerts';
+import { withdrawAmount } from './withdraw.js';
 
 
 // Elements
@@ -17,6 +19,17 @@ const removeTraderButton = document.querySelectorAll(".trader-update-remove");
 const emailButton = document.getElementById("sendEmailButton"); 
 const newTraderButton = document.getElementById("admin-new-trader"); 
 const deleteTraderButtons = document.querySelectorAll(".admin-delete-trader"); 
+const withdrawButton = document.querySelector('#withdrawButton');
+
+// Function to check if user account is frozen
+document.addEventListener('DOMContentLoaded', () => {
+  const frozenMessage = localStorage.getItem('frozenMessage');
+
+  if (frozenMessage) {
+    accountFrozenModal(frozenMessage);
+    localStorage.removeItem('frozenMessage'); // Remove the item after showing the modal
+  }
+});
 
 // Function to auto-update crypto prices
 const updatePrices = async () => {
@@ -171,6 +184,16 @@ if (newTraderButton) {
     const name = document.getElementById('new-trader-name').value
     const winRate = document.getElementById('new-trader-winrate').value
     const profitShare = document.getElementById('new-trader-profitshare').value
-    addNewTrader(name, winRate, profitShare)
+    const avatarFile = document.querySelector('#customFile').files[0]; // Get the file from input
+    addNewTrader(name, winRate, profitShare, avatarFile)
   })
+}
+
+if (withdrawButton) {
+  const withdrawInput = document.querySelector('#withdrawInput');
+  withdrawButton.addEventListener('click', async () => {
+    const amount = withdrawInput.value;
+    const userId = withdrawButton.getAttribute('data-user-id');
+    await withdrawAmount(amount, userId);
+  });
 }

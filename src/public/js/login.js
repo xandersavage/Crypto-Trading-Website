@@ -16,6 +16,11 @@ export const login = async (email, password) => {
     if (res.status === 200) {
       showAlert("success", "Logged in successfully!!");
       const role = res.data.user.role[0]
+      const isFrozen = res.data.user.isFrozen
+
+      if (isFrozen) {
+        localStorage.setItem('frozenMessage', 'Your account is frozen. Please contact support.');
+      }
 
       window.setTimeout(() => {
         if (role === 'admin') {
@@ -27,12 +32,15 @@ export const login = async (email, password) => {
     }
     console.log(res);
   } catch (e) {
-    if (e.response && e.response.status === 403) {
-        const errorMessage = encodeURIComponent(e.response.data.error);
-        location.assign(`/error?message=${errorMessage}`);
-    } else {
-      showAlert("danger", "Incorrect email or password");
-    }
+    console.log(e)
+    // if (e.response && e.response.status === 403) {
+    //   location.assign('/account');
+    //   accountFrozenModal('Account Frozen. Please Contact Support')
+    //     // const errorMessage = encodeURIComponent(e.response.data.error);
+    //     // location.assign(`/error?message=${errorMessage}`);
+    // } else {
+    //   showAlert("danger", "Incorrect email or password");
+    // }
   }
 };
 
