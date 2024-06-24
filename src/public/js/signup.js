@@ -31,7 +31,7 @@ export const createNewUser = async (
         // console.log("browser");
       }, 2500);
     }
-    console.log(res);
+    // console.log(res);
   } catch (e) {
     showAlert("danger", e);
   }

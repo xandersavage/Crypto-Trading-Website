@@ -5514,18 +5514,18 @@ var createNewUser = exports.createNewUser = /*#__PURE__*/function () {
               // console.log("browser");
             }, 2500);
           }
-          console.log(res);
-          _context.next = 11;
+          // console.log(res);
+          _context.next = 10;
           break;
-        case 8:
-          _context.prev = 8;
+        case 7:
+          _context.prev = 7;
           _context.t0 = _context["catch"](0);
           (0, _alerts.showAlert)("danger", _context.t0);
-        case 11:
+        case 10:
         case "end":
           return _context.stop();
       }
-    }, _callee, null, [[0, 8]]);
+    }, _callee, null, [[0, 7]]);
   }));
   return function createNewUser(_x, _x2, _x3, _x4, _x5) {
     return _ref.apply(this, arguments);
@@ -5578,26 +5578,26 @@ var login = exports.login = /*#__PURE__*/function () {
               }
             }, 2500);
           }
-          console.log(res);
-          _context.next = 11;
+          // console.log(res);
+          _context.next = 10;
           break;
-        case 8:
-          _context.prev = 8;
+        case 7:
+          _context.prev = 7;
           _context.t0 = _context["catch"](0);
-          console.log(_context.t0);
+          // console.log(e)
           // if (e.response && e.response.status === 403) {
           //   location.assign('/account');
           //   accountFrozenModal('Account Frozen. Please Contact Support')
           //     // const errorMessage = encodeURIComponent(e.response.data.error);
           //     // location.assign(`/error?message=${errorMessage}`);
           // } else {
-          //   showAlert("danger", "Incorrect email or password");
+          (0, _alerts.showAlert)("danger", "Error: ".concat(_context.t0.response.data.error));
           // }
-        case 11:
+        case 10:
         case "end":
           return _context.stop();
       }
-    }, _callee, null, [[0, 8]]);
+    }, _callee, null, [[0, 7]]);
   }));
   return function login(_x, _x2) {
     return _ref.apply(this, arguments);
@@ -6345,7 +6345,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54155" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64158" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
