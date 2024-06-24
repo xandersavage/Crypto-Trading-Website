@@ -30,7 +30,7 @@ export const login = async (email, password) => {
         }
       }, 2500);
     }
-    console.log(res);
+    // console.log(res);
   } catch (e) {
     // console.log(e)
     // if (e.response && e.response.status === 403) {
@@ -39,7 +39,7 @@ export const login = async (email, password) => {
     //     // const errorMessage = encodeURIComponent(e.response.data.error);
     //     // location.assign(`/error?message=${errorMessage}`);
     // } else {
-       showAlert("danger", e);
+       showAlert("danger", `error: ${e.response.data.error}`);
     // }
   }
 };
