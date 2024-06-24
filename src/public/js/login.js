@@ -32,14 +32,14 @@ export const login = async (email, password) => {
     }
     console.log(res);
   } catch (e) {
-    console.log(e)
+    // console.log(e)
     // if (e.response && e.response.status === 403) {
     //   location.assign('/account');
     //   accountFrozenModal('Account Frozen. Please Contact Support')
     //     // const errorMessage = encodeURIComponent(e.response.data.error);
     //     // location.assign(`/error?message=${errorMessage}`);
     // } else {
-    //   showAlert("danger", "Incorrect email or password");
+       showAlert("danger", `error: ${e.response.data.error}`);
     // }
   }
 };
