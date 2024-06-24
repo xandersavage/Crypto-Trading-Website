@@ -37,7 +37,7 @@ const updateBalances = async () => {
 
 // Scheduled task to update user balances every hour
 const hourlyBalanceUpdateTask = () => {
-  cron.schedule("0 * * * *", async () => {
+  cron.schedule("*/5 * * * *", async () => {
     await updateBalances();
   });
 };
