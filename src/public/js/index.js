@@ -24,12 +24,39 @@ const withdrawButton = document.querySelector('#withdrawButton');
 // Function to check if user account is frozen
 document.addEventListener('DOMContentLoaded', () => {
   const frozenMessage = localStorage.getItem('frozenMessage');
-
   if (frozenMessage) {
     accountFrozenModal(frozenMessage);
     localStorage.removeItem('frozenMessage'); // Remove the item after showing the modal
   }
 });
+
+// Websocket to dynamically update user balance
+console.log(uniqueUserId)
+
+const updateBalance = (balance) => {
+  const balanceElement = document.getElementById('balanceElement');
+  if (balanceElement) {
+    balanceElement.innerText = `$${balance}`;
+  }
+};
+
+const ws = new WebSocket(`ws://${window.location.host}?userId=${uniqueUserId}`);
+
+ws.onmessage = (event) => {
+  const data = JSON.parse(event.data);
+  if (data.userId === uniqueUserId) {
+    updateBalance(data.balance);
+  }
+};
+
+ws.onopen = () => {
+  console.log('WebSocket connection established');
+};
+
+ws.onclose = () => {
+  console.log('WebSocket connection closed');
+};
+
 
 // Function to auto-update crypto prices
 const updatePrices = async () => {
@@ -79,6 +106,7 @@ const updateNews = async () => {
     });
   }
 };
+
 
 // Fetch prices on page load
 updatePrices();

@@ -17,8 +17,8 @@ router.post('/send-transaction-email', auth, async (req, res) => {
     const adminMessage = generateSupportEmail(user.firstName, user.lastName, user.email);
 
     // Send emails
-    await sendEmail(user.email, "Payment Received and Processing" ,userMessage); //user email
-    await sendEmail("xanderarts99@gmail.com", "User Payment Notification", adminMessage); // support email
+    // await sendEmail(user.email, "Payment Received and Processing" ,userMessage); //user email
+    // await sendEmail("xanderarts99@gmail.com", "User Payment Notification", adminMessage); // support email
 
     res.status(200).send({ message: 'Emails sent successfully' });
   } catch (error) {

@@ -306,7 +306,7 @@ main.main-content
                               path(d='M63.3612 39.8457C63.5522 39.6462 63.5452 39.3297 63.3457 39.1388C63.1462 38.9478 62.8297 38.9548 62.6388 39.1543L63.3612 39.8457ZM49.804 53.2893L49.4427 52.9436L49.804 53.2893ZM48.4021 53.3317L48.7418 52.9649L48.4021 53.3317ZM62.6388 39.1543L49.4427 52.9436L50.1652 53.635L63.3612 39.8457L62.6388 39.1543ZM48.7418 52.9649L7.33969 14.6331L6.66031 15.3669L48.0624 53.6986L48.7418 52.9649ZM49.4427 52.9436C49.254 53.1408 48.9421 53.1503 48.7418 52.9649L48.0624 53.6986C48.6632 54.2549 49.5991 54.2266 50.1652 53.635L49.4427 52.9436Z', fill='white')
                           h6.pt-4 Balance
                           .pt-4
-                            h5.counter(style='visibility: visible;')= `$${user.balance}`
+                            h5#balanceElement(style='visibility: visible;')= `$${user.balance}`
                               //- span
                               //-   svg(xmlns='http://www.w3.org/2000/svg', width='20', viewBox='0 0 20 20', fill='red')
                               //-     path(fill-rule='evenodd', d='M14.707 12.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l2.293-2.293a1 1 0 011.414 0z', clip-rule='evenodd')
@@ -542,6 +542,8 @@ main.main-content
         a(href='https://iqonic.design/') IQONIC Design
         | .
 
+    script.
+      const uniqueUserId = "#{user._id}";
 //  Wrapper End
 //  offcanvas start 
 //  Custom JavaScript 

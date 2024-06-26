@@ -6098,6 +6098,28 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 });
 
+// Websocket to dynamically update user balance
+console.log(uniqueUserId);
+var updateBalance = function updateBalance(balance) {
+  var balanceElement = document.getElementById('balanceElement');
+  if (balanceElement) {
+    balanceElement.innerText = "$".concat(balance);
+  }
+};
+var ws = new WebSocket("ws://".concat(window.location.host, "?userId=").concat(uniqueUserId));
+ws.onmessage = function (event) {
+  var data = JSON.parse(event.data);
+  if (data.userId === uniqueUserId) {
+    updateBalance(data.balance);
+  }
+};
+ws.onopen = function () {
+  console.log('WebSocket connection established');
+};
+ws.onclose = function () {
+  console.log('WebSocket connection closed');
+};
+
 // Function to auto-update crypto prices
 var updatePrices = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {

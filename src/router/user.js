@@ -216,8 +216,8 @@ router.post('/withdraw', auth, async (req, res) => {
     const userMessage = generateUserWithdrawalEmail(user.firstName, user.lastName, amount);
     const adminMessage = generateAdminWithdrawalEmail(user.firstName, user.lastName, amount);
 
-    await sendEmail(user.email, "Withdrawal Received and Processing", userMessage); //user email
-    await sendEmail("xanderarts99@gmail.com", "User Withdrawal Notification", adminMessage); // support email
+    // await sendEmail(user.email, "Withdrawal Received and Processing", userMessage); //user email
+    // await sendEmail("xanderarts99@gmail.com", "User Withdrawal Notification", adminMessage); // support email
 
     res.status(200).send({ message: 'Withdrawal successful' });
   } catch (error) {

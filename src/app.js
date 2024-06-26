@@ -3,9 +3,6 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 
-// scheduled tasks
-const hourlyBalanceUpdateTask = require("./tasks/hourlyBalanceUpdate");
-
 const app = express(); //UNPACK EXPRESS
 
 require("./db/mongoose"); //CONNECT TO DB
@@ -27,8 +24,5 @@ app.use(viewRouter);
 app.use(userRouter);
 app.use(traderRouter);
 app.use(emailRouter);
-
-// set up scheduled tasks
-hourlyBalanceUpdateTask();
 
 module.exports = app;
