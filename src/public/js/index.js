@@ -30,34 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// Websocket to dynamically update user balance
-console.log(uniqueUserId)
-
-const updateBalance = (balance) => {
-  const balanceElement = document.getElementById('balanceElement');
-  if (balanceElement) {
-    balanceElement.innerText = `$${balance}`;
-  }
-};
-
-const ws = new WebSocket(`ws://${window.location.host}?userId=${uniqueUserId}`);
-
-ws.onmessage = (event) => {
-  const data = JSON.parse(event.data);
-  if (data.userId === uniqueUserId) {
-    updateBalance(data.balance);
-  }
-};
-
-ws.onopen = () => {
-  console.log('WebSocket connection established');
-};
-
-ws.onclose = () => {
-  console.log('WebSocket connection closed');
-};
-
-
 // Function to auto-update crypto prices
 const updatePrices = async () => {
   const prices = await getLivePrices();
