@@ -7,7 +7,7 @@ const updateBalance = (balance) => {
     }
   };
   
-  const ws = new WebSocket(`ws://${window.location.host}?userId=${uniqueUserId}`);
+  const ws = new WebSocket(`wss://${window.location.host}?userId=${uniqueUserId}`);
   
   ws.onmessage = (event) => {
     const data = JSON.parse(event.data);
