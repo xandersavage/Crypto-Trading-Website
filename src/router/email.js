@@ -1,11 +1,12 @@
 const express = require('express');
 const User = require('../model/user')
+const Transaction = require('../model/transaction')
 const { sendEmail, generateUserEmail, generateSupportEmail } = require('../emails/account')
 const auth = require('../middleware/auth')
 const router = express.Router();
 
 router.post('/send-transaction-email', auth, async (req, res) => {
-  const { userId } = req.body;
+  const { userId, amount } = req.body;
 
   try {
     const user = await User.findById(userId);
@@ -13,8 +14,22 @@ router.post('/send-transaction-email', auth, async (req, res) => {
       return res.status(404).send({ error: 'User not found' });
     }
 
-    const userMessage = generateUserEmail(user.firstName, user.lastName);
-    const adminMessage = generateSupportEmail(user.firstName, user.lastName, user.email);
+    // Create a new transaction
+    const newTransaction = new Transaction({
+      type: 'deposit',
+      amount: amount,
+      date: new Date(),
+    });
+
+    // Save the transaction
+    await newTransaction.save();
+
+    // Add the transaction to the user's transaction history
+    user.transactions.push(newTransaction);
+    await user.save();
+
+    // const userMessage = generateUserEmail(user.firstName, user.lastName);
+    // const adminMessage = generateSupportEmail(user.firstName, user.lastName, user.email);
 
     // Send emails
     // await sendEmail(user.email, "Payment Received and Processing" ,userMessage); //user email

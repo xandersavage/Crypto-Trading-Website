@@ -1,8 +1,8 @@
 meta(charset='utf-8')
 meta(name='viewport', content='width=device-width,initial-scale=1,shrink-to-fit=no')
-title COINEX | Responsive Bootstrap 5 Admin Dashboard Template
+title coinblazers
 //  Favicon 
-link(rel='shortcut icon', href='/assets/images/favicon.ico')
+link(rel='shortcut icon', href='/assets/images/coinblazers-favicon2.png')
 link(rel='stylesheet', href='/assets/css/libs.min.css')
 link(rel='stylesheet', href='/assets/css/coinex.css?v=1.0.0')
 //  loader Start 
@@ -46,11 +46,11 @@ main.main-content
     // Nav Start
     nav.nav.navbar.navbar-expand-lg.navbar-light.iq-navbar.border-bottom
       .container-fluid.navbar-inner
-        a.navbar-brand(href='index.html').
-        .sidebar-toggle(data-toggle='sidebar', data-active='true')
-          i.icon
-            svg(width='20px', height='20px', viewBox='0 0 24 24')
-              path(fill='currentColor', d='M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z')
+        //- a.navbar-brand(href='index.html').
+        //- .sidebar-toggle(data-toggle='sidebar', data-active='true')
+        //-   i.icon
+        //-     svg(width='20px', height='20px', viewBox='0 0 24 24')
+        //-       path(fill='currentColor', d='M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z')
         h4.title.
           
           Dashboard
@@ -70,65 +70,71 @@ main.main-content
                   p.mb-0.caption-sub-title= user.role
               ul.dropdown-menu.dropdown-menu-end(aria-labelledby='navbarDropdown')
                 li.border-0
-                  a#logoutLink.dropdown-item(href='') Logout
-                //- li.border-0
-                //-   hr.m-0.dropdown-divider
-                //- li.border-0
-                //-   a.dropdown-item(href='../dashboard/app/user-profile.html') Profile
+                  a.dropdown-item(href='/user-profile') Profile
+                li.border-0
+                  a.dropdown-item(href='/account') Dashboard
+                li.border-0
+                  a.dropdown-item(href='/deposit') Deposit
+                li.border-0
+                  a.dropdown-item(href='/withdraw') Withdrawal
+                li.border-0
+                  hr.m-0.dropdown-divider
+                li.border-0
+                  a.dropdown-item#logoutLink(href='') Logout
     // Nav End
   .container-fluid.content-inner.pb-0
-    .row
-      .col-lg-12
-        .row.align-items-center.mb-4
-          .col-xl-9.d-none.d-md-block
-            .card.mb-xl-0
-              .card-body
-                .d-flex.justify-content-between.flex-wrap
-                  .d-flex
-                    .dropdown.mt-2.ms-2
-                      a.text-white#dropdownMenuButton4(href='#', data-bs-toggle='dropdown', aria-expanded='false')
-                        span.mt-2 BTC/USD
-                        svg(xmlns='http://www.w3.org/2000/svg', width='20px', viewBox='0 0 20 20', fill='currentColor')
-                          path(fill-rule='evenodd', d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z', clip-rule='evenodd')
-                  .d-none.d-lg-block.w-50
-                    .d-flex.justify-content-evenly.flex-1
-                      span.text-primary
-                        | 
-                        | 37,390.00
-                        br
-                        small | $37,390.00
-                      span.text-primary
-                        | 
-                        | 129.51+0.8%
-                        br
-                        small 24th changes
-                      span
-                        | 
-                        | 37,440.01
-                        br
-                        small 24th high
-                      span
-                        | 
-                        | 37,327.30
-                        br
-                        small 24th low
-                      span.d-none
-                        | 
-                        | 37,390.00
-                        br
-                        small 24th volume(BTC)
-                  .d-flex.align-items-center.justify-content-between
-                    span
-                      svg(width='32', height='32', viewBox='0 0 34 53', fill='none', xmlns='http://www.w3.org/2000/svg')
-                        rect(x='6', width='1', height='53', rx='0.5', fill='white')
-                        rect(x='0.5', y='9.5', width='12', height='34', rx='1.5', fill='#202022')
-                        rect(x='0.5', y='9.5', width='12', height='34', rx='1.5', stroke='white')
-                        rect(x='27', width='1', height='53', rx='0.5', fill='white')
-                        rect(x='21.5', y='13.5', width='12', height='25', rx='1.5', fill='#202022')
-                        rect(x='21.5', y='13.5', width='12', height='25', rx='1.5', stroke='white')
-                    a.bg-secondary.rounded-1.p-2.ms-2(href='#')
-                      svg(width='26', viewBox='0 0 40 40', fill='none', xmlns='http://www.w3.org/2000/svg')
-                        path(d='M26.3875 14.1244L16.8484 23.7653L5.99906 16.9795C4.44458 16.0069 4.76794 13.6457 6.5262 13.1315L32.2854 5.58795C33.8954 5.11605 35.3876 6.62138 34.9093 8.23666L27.2885 33.9779C26.7664 35.7387 24.4187 36.0533 23.4553 34.4921L16.8433 23.767', stroke='white', stroke-linecap='round', stroke-linejoin='round')
+    //- .row
+    //-   .col-lg-12
+    //-     .row.align-items-center.mb-4
+    //-       .col-xl-9.d-none.d-md-block
+    //-         .card.mb-xl-0
+    //-           .card-body
+    //-             .d-flex.justify-content-between.flex-wrap
+    //-               .d-flex
+    //-                 .dropdown.mt-2.ms-2
+    //-                   a.text-white#dropdownMenuButton4(href='#', data-bs-toggle='dropdown', aria-expanded='false')
+    //-                     span.mt-2 BTC/USD
+    //-                     svg(xmlns='http://www.w3.org/2000/svg', width='20px', viewBox='0 0 20 20', fill='currentColor')
+    //-                       path(fill-rule='evenodd', d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z', clip-rule='evenodd')
+    //-               .d-none.d-lg-block.w-50
+    //-                 .d-flex.justify-content-evenly.flex-1
+    //-                   span.text-primary
+    //-                     | 
+    //-                     | 37,390.00
+    //-                     br
+    //-                     small | $37,390.00
+    //-                   span.text-primary
+    //-                     | 
+    //-                     | 129.51+0.8%
+    //-                     br
+    //-                     small 24th changes
+    //-                   span
+    //-                     | 
+    //-                     | 37,440.01
+    //-                     br
+    //-                     small 24th high
+    //-                   span
+    //-                     | 
+    //-                     | 37,327.30
+    //-                     br
+    //-                     small 24th low
+    //-                   span.d-none
+    //-                     | 
+    //-                     | 37,390.00
+    //-                     br
+    //-                     small 24th volume(BTC)
+    //-               .d-flex.align-items-center.justify-content-between
+    //-                 span
+    //-                   svg(width='32', height='32', viewBox='0 0 34 53', fill='none', xmlns='http://www.w3.org/2000/svg')
+    //-                     rect(x='6', width='1', height='53', rx='0.5', fill='white')
+    //-                     rect(x='0.5', y='9.5', width='12', height='34', rx='1.5', fill='#202022')
+    //-                     rect(x='0.5', y='9.5', width='12', height='34', rx='1.5', stroke='white')
+    //-                     rect(x='27', width='1', height='53', rx='0.5', fill='white')
+    //-                     rect(x='21.5', y='13.5', width='12', height='25', rx='1.5', fill='#202022')
+    //-                     rect(x='21.5', y='13.5', width='12', height='25', rx='1.5', stroke='white')
+    //-                 a.bg-secondary.rounded-1.p-2.ms-2(href='#')
+    //-                   svg(width='26', viewBox='0 0 40 40', fill='none', xmlns='http://www.w3.org/2000/svg')
+    //-                     path(d='M26.3875 14.1244L16.8484 23.7653L5.99906 16.9795C4.44458 16.0069 4.76794 13.6457 6.5262 13.1315L32.2854 5.58795C33.8954 5.11605 35.3876 6.62138 34.9093 8.23666L27.2885 33.9779C26.7664 35.7387 24.4187 36.0533 23.4553 34.4921L16.8433 23.767', stroke='white', stroke-linecap='round', stroke-linejoin='round')
           //- .col-xl-3
           //-   .d-grid.grid-3-auto.gap-card
           //-     .dropdown
@@ -194,9 +200,9 @@ main.main-content
                       path(d='M3.86124 21.6224L11.2734 16.8577C11.6095 16.6417 12.041 16.6447 12.3718 16.8655L18.9661 21.2663C19.2968 21.4871 19.7283 21.4901 20.0644 21.2741L27.875 16.2534', stroke='#BFBFBF', stroke-linecap='round', stroke-linejoin='round')
                       path(d='M26.7847 13.3246L31.6677 14.0197L30.4485 18.7565L26.7847 13.3246ZM30.2822 19.4024C30.2823 19.4023 30.2823 19.4021 30.2824 19.402L30.2822 19.4024ZM31.9991 14.0669L31.9995 14.0669L32.0418 13.7699L31.9995 14.0669C31.9994 14.0669 31.9993 14.0669 31.9991 14.0669Z', fill='#BFBFBF', stroke='#BFBFBF')
                     .pt-3
-                      h4.counter#btc-price(style='visibility: visible;') $34.850,10
+                      h4.counter#btc-price(style='visibility: visible;') $60799.00
                       .pt-3
-                        small#btc-change + 0.8%
+                        small#btc-change -1.61%
               .col-lg-4
                 .card.shining-card
                   .card-body
@@ -206,9 +212,9 @@ main.main-content
                       path(d='M3.86124 21.6224L11.2734 16.8577C11.6095 16.6417 12.041 16.6447 12.3718 16.8655L18.9661 21.2663C19.2968 21.4871 19.7283 21.4901 20.0644 21.2741L27.875 16.2534', stroke='#BFBFBF', stroke-linecap='round', stroke-linejoin='round')
                       path(d='M26.7847 13.3246L31.6677 14.0197L30.4485 18.7565L26.7847 13.3246ZM30.2822 19.4024C30.2823 19.4023 30.2823 19.4021 30.2824 19.402L30.2822 19.4024ZM31.9991 14.0669L31.9995 14.0669L32.0418 13.7699L31.9995 14.0669C31.9994 14.0669 31.9993 14.0669 31.9991 14.0669Z', fill='#BFBFBF', stroke='#BFBFBF')
                     .progress-detail.pt-3
-                      h4.counter#eth-price(style='visibility: visible;') $2,138.87
+                      h4.counter#eth-price(style='visibility: visible;') $3387.98
                       .pt-3
-                        small#eth-change + 0.8%
+                        small#eth-change -1.85%
               .col-lg-4
                 .card.shining-card
                   .card-body
@@ -218,9 +224,9 @@ main.main-content
                       path(d='M3.86124 21.6224L11.2734 16.8577C11.6095 16.6417 12.041 16.6447 12.3718 16.8655L18.9661 21.2663C19.2968 21.4871 19.7283 21.4901 20.0644 21.2741L27.875 16.2534', stroke='#BFBFBF', stroke-linecap='round', stroke-linejoin='round')
                       path(d='M26.7847 13.3246L31.6677 14.0197L30.4485 18.7565L26.7847 13.3246ZM30.2822 19.4024C30.2823 19.4023 30.2823 19.4021 30.2824 19.402L30.2822 19.4024ZM31.9991 14.0669L31.9995 14.0669L32.0418 13.7699L31.9995 14.0669C31.9994 14.0669 31.9993 14.0669 31.9991 14.0669Z', fill='#BFBFBF', stroke='#BFBFBF')
                     .progress-detail.pt-3
-                      h4.counter#ltc-price(style='visibility: visible;') $34.850,10
+                      h4.counter#ltc-price(style='visibility: visible;') $73.07
                       .pt-3
-                        small#ltc-change + 0.8%
+                        small#ltc-change -0.54%
               //- .col-lg-6
               //-   .card
               //-     .card-header.d-flex.justify-content-between.flex-wrap
@@ -306,7 +312,7 @@ main.main-content
                               path(d='M63.3612 39.8457C63.5522 39.6462 63.5452 39.3297 63.3457 39.1388C63.1462 38.9478 62.8297 38.9548 62.6388 39.1543L63.3612 39.8457ZM49.804 53.2893L49.4427 52.9436L49.804 53.2893ZM48.4021 53.3317L48.7418 52.9649L48.4021 53.3317ZM62.6388 39.1543L49.4427 52.9436L50.1652 53.635L63.3612 39.8457L62.6388 39.1543ZM48.7418 52.9649L7.33969 14.6331L6.66031 15.3669L48.0624 53.6986L48.7418 52.9649ZM49.4427 52.9436C49.254 53.1408 48.9421 53.1503 48.7418 52.9649L48.0624 53.6986C48.6632 54.2549 49.5991 54.2266 50.1652 53.635L49.4427 52.9436Z', fill='white')
                           h6.pt-4 Balance
                           .pt-4
-                            h5#balanceElement(style='visibility: visible;')= `$${user.balance}`
+                            h5#balanceElement.counter(style='visibility: visible;')= `$${user.balance}`
                               //- span
                               //-   svg(xmlns='http://www.w3.org/2000/svg', width='20', viewBox='0 0 20 20', fill='red')
                               //-     path(fill-rule='evenodd', d='M14.707 12.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l2.293-2.293a1 1 0 011.414 0z', clip-rule='evenodd')
@@ -323,38 +329,38 @@ main.main-content
                     .form-check.active
                       input.form-check-input#flexRadioDefault1(type='radio', name='flexRadioDefault', checked)
                       label.form-check-label(for='flexRadioDefault1').
-                        ETH
+                        BTC
                         
-                  .d-flex.align-items-center.ms-3
-                    .form-check
-                      input.form-check-input#flexRadioDefault2(type='radio', name='flexRadioDefault')
-                      label.form-check-label(for='flexRadioDefault2').
-                        XMR
+                  //- .d-flex.align-items-center.ms-3
+                  //-   .form-check
+                  //-     input.form-check-input#flexRadioDefault2(type='radio', name='flexRadioDefault')
+                  //-     label.form-check-label(for='flexRadioDefault2').
+                  //-       XMR
                         
-                  .d-flex.align-items-center.ms-3
-                    .form-check
-                      input.form-check-input#flexRadioDefault3(type='radio', name='flexRadioDefault')
-                      label.form-check-label(for='flexRadioDefault3').
-                        LTC
+                  //- .d-flex.align-items-center.ms-3
+                  //-   .form-check
+                  //-     input.form-check-input#flexRadioDefault3(type='radio', name='flexRadioDefault')
+                  //-     label.form-check-label(for='flexRadioDefault3').
+                  //-       LTC
                         
-                  .d-flex.align-items-center.ms-3
-                    .form-check
-                      input.form-check-input#flexRadioDefault4(type='radio', name='flexRadioDefault')
-                      label.form-check-label(for='flexRadioDefault4').
-                        XMR
+                  //- .d-flex.align-items-center.ms-3
+                  //-   .form-check
+                  //-     input.form-check-input#flexRadioDefault4(type='radio', name='flexRadioDefault')
+                  //-     label.form-check-label(for='flexRadioDefault4').
+                  //-       XMR
                         
               .dropdown.ms-4
-                a.btn.btn-primary.dropdown-toggle.mt-2#dropdownMenuLink(href='#', role='button', data-bs-toggle='dropdown', aria-expanded='false').
+                a.btn.btn-primary.mt-2(href='#', role='button', data-bs-toggle='dropdown', aria-expanded='false').
                   
-                  Weekly (2020)
+                  Weekly (2024)
                   
-                ul.dropdown-menu(aria-labelledby='dropdownMenuLink')
-                  li
-                    a.dropdown-item(href='#') Weekly (2020)
-                  li
-                    a.dropdown-item(href='#') Monthly (2020)
-                  li
-                    a.dropdown-item(href='#') Today (2020)
+                //- ul.dropdown-menu(aria-labelledby='dropdownMenuLink')
+                //-   li
+                //-     a.dropdown-item(href='#') Weekly (2024)
+                //-   li
+                //-     a.dropdown-item(href='#') Monthly (2024)
+                //-   li
+                //-     a.dropdown-item(href='#') Today (2024)
               .card-body
                 #apex-candlestick-chart
           .col-lg-12
@@ -402,31 +408,6 @@ main.main-content
         .row
           .col-lg-12
             .card
-              .card-header.d-flex.justify-content-between.flex-wrap
-                .header-title
-                  h4.card-title Withdraw
-                  p.mb-0 You can request a withdrawal of funds from your account. Please ensure the withdrawal amount is greater than balance before submitting your request.
-                  p.mb-0
-                    | **Processing Time:** Withdrawal requests are processed within 1-3 business days.
-                    br
-                    | **Fees:** A small transaction fee may apply depending on your withdrawal method.
-                    br
-                    | **Verification:** For your security, withdrawals may require additional verification.
-              .card-body
-                .input-group.mb-4
-                  span.input-group-text#basic-addon3 Amount
-                  input.form-control.col-lg-8#withdrawInput(type='text', aria-label='Recipient\'s username', aria-describedby='basic-addon3')
-                .d-grid.grid-cols-1.gap-card.justify-content-between
-                  div
-                    button.btn.btn-primary.w-100#withdrawButton(type='button', data-user-id=user._id)
-                      svg(width='17', height='17', viewBox='0 0 17 17', fill='none', xmlns='http://www.w3.org/2000/svg')
-                        path(d='M8.74074 8.25926L2 6.7037L16 1M8.74074 8.25926L10.8148 15L16 1M8.74074 8.25926L16 1', stroke='white')
-                      span.ms-2 Request Withdrawal
-              .card-footer.text-muted
-                p.mb-0 Please note: Before clicking "Request Withdrawal" button ensure withdrawal amount is greater than the balance.
-
-          .col-lg-12
-            .card
               .card-header
                 .header-title
                   h4.card-title Latest News
@@ -436,59 +417,48 @@ main.main-content
                     .d-flex.justify-content-between.rounded-pill
                       img.img-fluid.avatar.avatar-40.avatar-rounded(src='/assets/images/coins/01.png', alt='img6')
                       .ms-3.flex-grow-1
-                        h5.mb-2 Bitcoin
-                        p.text-success.mb-2 +$10,00
-                        p.fs-6 Bitcoins Evolution™. 234000 Satisfied Customers From 107 Countries.
-                      div
-                        p 11/02/21
+                        h5.mb-2 Bitcoin HODLer Supply Continues Decline: A Worrying Sign?
+                        p.fs-6 On-chain data shows the Bitcoin long-term holder supply has continued declining recently.
                   li.d-flex.align-items-center.pt-3
                     .d-flex.justify-content-between.rounded-pill
                       img.img-fluid.avatar.avatar-40.avatar-rounded(src='/assets/images/coins/09.png', alt='img7')
                       .ms-3.flex-grow-1
-                        h5.mb-2 Ethereum
-                        p.text-danger.mb-2 -$50,00
-                        p.fs-6 Ethereum is a decentralized, blockchain with smart contract functionality
-                      div
-                        p 11/02/21
+                        h5.mb-2 Coinbase to launch CFTC-regulated futures trading for 5 altcoins
+                        p.fs-6 Coinbase Derivatives plans to launch margined futures contracts for Avalanche (AVAX), Chainlink (LINK), Polkadot (DOT), Stellar (XLM), and Shiba Inu (SHIB).
                   li.d-flex.align-items-center.pt-3
                     .d-flex.justify-content-between.rounded-pill
                       img.img-fluid.avatar.avatar-40.avatar-rounded(src='../assets/images/coins/06.png', alt='img8')
                       .ms-3.flex-grow-1
-                        h5.mb-2 Litecoin
-                        p.text-danger.mb-2 -$50,00
-                        p.fs-6 Litecoin is a peer-to-peer cryptocurrency and open-source software
-                      div
-                        p 11/02/21
+                        h5.mb-2 Could Solana Mimic Ethereum and Surge to $1,000? Analysts Weigh In
+                        p.fs-6 Zhu Su of Three Arrows Capital has made a bold projection for Solana (SOL), suggesting it might reach $1,000 per unit.
           .col-lg-12
             .card
-              .card-header.d-flex.justify-content-between.flex-wrap
+              .card-header
                 .header-title
-                  h4.card-title Fund Account
-                  p.mb-0 Only click the "Notify" button after you have made the payment to the specified wallet address. Clicking this button will alert our support team and you will receive a confirmation email. False notifications will delay the processing of your payment and may result in account restrictions. Your cooperation is essential.
+                  h4.card-title Transaction History
               .card-body
-                .d-grid.grid-cols-5.gap-card.mb-4
-                  div
-                    img.img-fluid.avatar.avatar-30px.avatar-rounded(src='/assets/images/avatars/02.png', alt='img36')
-                  div
-                    img.img-fluid.avatar.avatar-30px.avatar-rounded(src='/assets/images/avatars/03.png', alt='img37')
-                  div
-                    img.img-fluid.avatar.avatar-30px.avatar-rounded(src='/assets/images/avatars/04.png', alt='img38')
-                  div
-                    img.img-fluid.avatar.avatar-30px.avatar-rounded(src='/assets/images/avatars/05.png', alt='img39')
-                  div
-                    img.img-fluid.avatar.avatar-30px.avatar-rounded(src='/assets/images/avatars/06.png', alt='img40')
-                .input-group.mb-4
-                  span.input-group-text#basic-addon3 USDT Wallet
-                  input.form-control.col-lg-8(type='text', value='0x3036d0a84e2e28785B9bbb5aD9Ee97fe16d915cD', aria-label='Recipient\'s username', aria-describedby='basic-addon3', readonly='readonly')
-                .input-group.mb-4
-                  span.input-group-text#basic-addon3 BTC Wallet
-                  input.form-control.col-lg-8(type='text', value='1MsXeL1fXnNmnbMDzKsQc2M4keNyqhvLpQ', aria-label='Recipient\'s username', aria-describedby='basic-addon3', readonly='readonly')
-                .d-grid.grid-cols-1.gap-card.justify-content-between
-                  div
-                    button.btn.btn-primary.w-100#sendEmailButton(type='button', data-user-id=user._id)
-                      svg(width='17', height='17', viewBox='0 0 17 17', fill='none', xmlns='http://www.w3.org/2000/svg')
-                        path(d='M8.74074 8.25926L2 6.7037L16 1M8.74074 8.25926L10.8148 15L16 1M8.74074 8.25926L16 1', stroke='white')
-                      span.ms-2 Notify
+                if user.transactions && user.transactions.length > 0
+                  ul.list-inline.m-0.p-0
+                    each transaction in user.transactions
+                      li.d-flex.align-items-center.pt-3
+                        .d-flex.justify-content-between.rounded-pill
+                          img.img-fluid.avatar.avatar-40.avatar-rounded(src='/assets/images/coins/01.png' alt='img6')
+                          .ms-3.flex-grow-1
+                            if transaction.type === 'deposit'
+                              h5.mb-2 Deposit
+                              p.text-success.mb-2 +$#{transaction.amount}
+                              p.fs-6 Deposit of $#{transaction.amount} on #{transaction.date}
+                              //- div
+                              //-   p #{transaction.date}
+                            else if transaction.type === 'withdrawal'
+                              h5.mb-2 Withdrawal
+                              p.text-danger.mb-2 -$#{transaction.amount}
+                              p.fs-6 Withdrawal of $#{transaction.amount} on #{transaction.date}
+                              //- div
+                              //-   p #{transaction.date}
+                else
+                  p.mb-0 No transactions found. Please initiate a deposit or withdrawal to see your transaction history here.
+            
           //- .col-md-12
           //-   .card
           //-     .card-header.d-flex.justify-content-between.flex-wrap
@@ -522,26 +492,6 @@ main.main-content
           //-                 circle(cx='12', cy='12', r='8', fill='#FF2E2E')
           //-             .ms-3
           //-               span.text-light Litecoin
-  footer.footer
-    .footer-body
-      ul.left-panel.list-inline.mb-0.p-0
-        li.list-inline-item
-          a.text-white(href='../dashboard/extra/privacy-policy.html') Privacy Policy
-        li.list-inline-item
-          a.text-white(href='../dashboard/extra/terms-of-service.html') Terms of Use
-      .right-panel
-        | 
-        | ©
-        script document.write(new Date().getFullYear())
-        | COINEX, Made with
-
-        span.text-gray
-          svg(width='15', viewBox='0 0 24 24', fill='none', xmlns='http://www.w3.org/2000/svg')
-            path(fill-rule='evenodd', clip-rule='evenodd', d='M15.85 2.50065C16.481 2.50065 17.111 2.58965 17.71 2.79065C21.401 3.99065 22.731 8.04065 21.62 11.5806C20.99 13.3896 19.96 15.0406 18.611 16.3896C16.68 18.2596 14.561 19.9196 12.28 21.3496L12.03 21.5006L11.77 21.3396C9.48102 19.9196 7.35002 18.2596 5.40102 16.3796C4.06102 15.0306 3.03002 13.3896 2.39002 11.5806C1.26002 8.04065 2.59002 3.99065 6.32102 2.76965C6.61102 2.66965 6.91002 2.59965 7.21002 2.56065H7.33002C7.61102 2.51965 7.89002 2.50065 8.17002 2.50065H8.28002C8.91002 2.51965 9.52002 2.62965 10.111 2.83065H10.17C10.21 2.84965 10.24 2.87065 10.26 2.88965C10.481 2.96065 10.69 3.04065 10.89 3.15065L11.27 3.32065C11.3618 3.36962 11.4649 3.44445 11.554 3.50912C11.6104 3.55009 11.6612 3.58699 11.7 3.61065C11.7163 3.62028 11.7329 3.62996 11.7496 3.63972C11.8354 3.68977 11.9247 3.74191 12 3.79965C13.111 2.95065 14.46 2.49065 15.85 2.50065ZM18.51 9.70065C18.92 9.68965 19.27 9.36065 19.3 8.93965V8.82065C19.33 7.41965 18.481 6.15065 17.19 5.66065C16.78 5.51965 16.33 5.74065 16.18 6.16065C16.04 6.58065 16.26 7.04065 16.68 7.18965C17.321 7.42965 17.75 8.06065 17.75 8.75965V8.79065C17.731 9.01965 17.8 9.24065 17.94 9.41065C18.08 9.58065 18.29 9.67965 18.51 9.70065Z', fill='currentColor')
-        | by 
-        a(href='https://iqonic.design/') IQONIC Design
-        | .
-
     script.
       const uniqueUserId = "#{user._id}";
 //  Wrapper End

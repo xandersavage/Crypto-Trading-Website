@@ -1,89 +1,45 @@
-// const mongoose = require("mongoose");
-
-// const transactionSchema = new mongoose.Schema({
-//   userId: {
-//     type: mongoose.Schema.Types.ObjectId,
-//     ref: "User",
-//     required: true
-//   },
-//   type: {
-//     type: String,
-//     enum: ["buy", "sell"],
-//     required: true
-//   },
-//   coin: {
-//     type: String,
-//     enum: ["BTC", "ETH", "LTC", "XRP"], // Enum for allowed coins
-//     required: true
-//   },
-//   amount: {
-//     type: Number,
-//     required: true
-//   },
-//   price: {
-//     type: Number,
-//     required: true
-//   },
-//   date: {
-//     type: Date,
-//     default: Date.now
-//   }
-// });
-
-// const Transaction = mongoose.model("Transaction", transactionSchema);
-
-// module.exports = Transaction;
-
 const mongoose = require("mongoose");
 
-const transactionSchema = new mongoose.Schema(
-  {
-    title: {
-      type: String,
-      required: true
-    },
-    description: {
-      type: String,
-      required: true
-    },
-    remark: {
-      type: String
-    },
-    status: {
-      type: String,
-      enum: ["Ongoing", "Resolved"],
-      default: "Ongoing"
-    },
-    type: {
-      type: String,
-      required: true,
-      enum: ["Academic", "Non-Academic"]
-    },
-    priority: {
-      type: String,
-      enum: ["Low", "Medium", "High"],
-      default: "Medium"
-    },
-    attachments: [
-      {
-        data: Buffer, // Buffer to store the binary data of the image
-        contentType: String // MIME type of the image
-      }
-    ],
-    resolvedAt: {
-      type: Date
-    },
-    author: {
-      //This field EXISTS in the DB
-      type: mongoose.Schema.Types.ObjectId,
-      required: true,
-      ref: "User"
-    }
+// Helper function to format amount with commas
+const formatAmount = (amount) => {
+  return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+};
+
+// Helper function to format date nicely
+const formatDate = (date) => {
+  const options = { day: 'numeric', month: 'long', year: 'numeric' };
+  return date.toLocaleDateString('en-US', options);
+};
+
+const transactionSchema = new mongoose.Schema({
+  type: {
+    type: String,
+    enum: ['deposit', 'withdrawal'],
+    required: true
   },
-  {
-    timestamps: true
+  amount: {
+    type: String, // Store the formatted amount as a string
+    required: true,
+    get: formatAmount,
+    set: formatAmount
+  },
+  date: {
+    type: String, // Store the formatted date as a string
+    required: true,
+    default: () => formatDate(new Date())
   }
-);
+});
+
+// Ensure getters are applied
+transactionSchema.set('toJSON', { getters: true });
+transactionSchema.set('toObject', { getters: true });
+
+// Apply formatting before saving
+transactionSchema.pre('save', function (next) {
+  this.amount = formatAmount(this.amount);
+  this.date = formatDate(new Date(this.date));
+  next();
+});
 
 const Transaction = mongoose.model("Transaction", transactionSchema);
 

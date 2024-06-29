@@ -7,6 +7,7 @@ import { getLivePrices } from './prices.js';
 import { getCryptoNews } from './news.js';
 import { accountFrozenModal } from './alerts';
 import { withdrawAmount } from './withdraw.js';
+import { updateUserProfile } from './user-update.js';
 
 
 // Elements
@@ -20,6 +21,7 @@ const emailButton = document.getElementById("sendEmailButton");
 const newTraderButton = document.getElementById("admin-new-trader"); 
 const deleteTraderButtons = document.querySelectorAll(".admin-delete-trader"); 
 const withdrawButton = document.querySelector('#withdrawButton');
+const userUpdateProfileBtn = document.querySelector('#my-profile-update'); 
 
 // Function to check if user account is frozen
 document.addEventListener('DOMContentLoaded', () => {
@@ -88,6 +90,18 @@ setInterval(updatePrices, 60000);
 updateNews();
 // Optionally, update news every hour
 setInterval(updateNews, 3600000);
+
+if (userUpdateProfileBtn) {
+  userUpdateProfileBtn.addEventListener("click", e => {
+    e.preventDefault();
+    const firstName = document.getElementById("firstName").value;
+    const lastName = document.getElementById("lastName").value;
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    const phonenum = document.getElementById("phonenum").value;
+    updateUserProfile(firstName, lastName, phonenum, email, password);
+  });
+}
 
 if (signupForm) {
   signupForm.addEventListener("submit", e => {
@@ -173,8 +187,9 @@ if (logoutLink) {
 if (emailButton) {
   emailButton.addEventListener("click", e => {
     e.preventDefault();
+    const depositAmount = document.querySelector('#withdrawInput').value
     const userId = emailButton.getAttribute('data-user-id');
-    sendEmail(userId);
+    sendEmail(userId, depositAmount);
   });
 }
 

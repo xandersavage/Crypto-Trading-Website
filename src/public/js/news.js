@@ -8,7 +8,7 @@ export const getCryptoNews = async () => {
 
     // Limit descriptions to only the first sentence
     return newsList.map(news => {
-      const description = news.description.split('. ')[0] + '.';
+      const description = news.description.split('. ').slice(0, 2).join('. ') + '.';
       const date = new Date(news.date).toLocaleDateString(); // Format the date
       return { ...news, description, date };
     });

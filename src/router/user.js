@@ -1,5 +1,6 @@
 const express = require("express");
 const User = require("../model/user");
+const Transaction = require('../model/transaction')
 const auth = require("../middleware/auth");
 const adminAuth = require("../middleware/adminAuth");
 const { sendEmail, generateUserWithdrawalEmail, generateAdminWithdrawalEmail } = require('../emails/account')
@@ -115,9 +116,9 @@ router.patch("/admin/users/:id", auth, async (req, res) => {
 });
 
 //UPDATE MY PROFILE
-router.patch("/users/profile", auth, async (req, res) => {
+router.post("/users/profile", auth, async (req, res) => {
   const updates = Object.keys(req.body);
-  const allowedUpdates = ["name", "email", "age", "college", "department"]; // you can include password
+  const allowedUpdates = ["firstName", "lastName", "phonenum", "email", "password"]; // you can include password
   const isValidOperation = updates.every(update =>
     allowedUpdates.includes(update)
   );
@@ -132,7 +133,7 @@ router.patch("/users/profile", auth, async (req, res) => {
       // console.log(`${req.user[update]} = ${req.body[update]}`);
     });
     await req.user.save();
-    res.send(req.user);
+    res.status(200).send(req.user);
   } catch (e) {
     res.status(400).send(e);
   }
@@ -212,9 +213,23 @@ router.post('/withdraw', auth, async (req, res) => {
     user.balance -= amount;
     await user.save();
 
-    // Send email notification to admin
-    const userMessage = generateUserWithdrawalEmail(user.firstName, user.lastName, amount);
-    const adminMessage = generateAdminWithdrawalEmail(user.firstName, user.lastName, amount);
+    // Create a new transaction
+    const newTransaction = new Transaction({
+      type: 'withdrawal',
+      amount: amount,
+      date: new Date(),
+    });
+
+    // Save the transaction
+    await newTransaction.save();
+
+    // Add the transaction to the user's transaction history
+    user.transactions.push(newTransaction);
+    await user.save();
+
+    // Send email notification to admin and user
+    // const userMessage = generateUserWithdrawalEmail(user.firstName, user.lastName, amount);
+    // const adminMessage = generateAdminWithdrawalEmail(user.firstName, user.lastName, amount);
 
     // await sendEmail(user.email, "Withdrawal Received and Processing", userMessage); //user email
     // await sendEmail("xanderarts99@gmail.com", "User Withdrawal Notification", adminMessage); // support email

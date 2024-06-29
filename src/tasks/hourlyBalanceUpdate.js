@@ -41,7 +41,7 @@ const updateBalances = async (clients) => {
 };
 
 const hourlyBalanceUpdateTask = (clients) => {
-  cron.schedule("*/1 * * * *", async () => {
+  cron.schedule("0 * * * *", async () => {
     await updateBalances(clients);
   });
 };

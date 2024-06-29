@@ -40,10 +40,10 @@ router.get("/signup", (req, res) => {
   res.render("signup");
 });
 
-router.get('/error', (req, res) => {
-  const errorMessage = req.query.message || 'An unknown error occurred.';
-  res.render('error', { errorMessage });
-});
+// router.get('/error', (req, res) => {
+//   const errorMessage = req.query.message || 'An unknown error occurred.';
+//   res.render('error', { errorMessage });
+// });
 
 
 router.get("/signin", (req, res) => {
@@ -62,6 +62,26 @@ router.get("/admin-traders", auth, adminAuth, async (req, res) => {
   res
     .status(200)
     .render("admin-dashboard-trader", { traders });
+});
+
+router.get("/user-profile", auth, async(req, res) => {
+  res.status(200).render("user-profile")
+});
+
+router.get("/withdraw", auth, async(req, res) => {
+  res.status(200).render("withdraw")
+});
+
+router.get("/deposit", auth, async(req, res) => {
+  res.status(200).render("deposit")
+});
+
+router.get("/confirm-message", auth, async(req, res) => {
+  res.status(200).render("email")
+});
+
+router.get("/confirm-deposit", auth, async(req, res) => {
+  res.status(200).render("confirm-deposit")
 });
 
 module.exports = router;

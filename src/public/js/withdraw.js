@@ -1,5 +1,5 @@
 import axios from "axios";
-import { showWithdrawalEmailModal } from './alerts'
+import { showAlert } from './alerts'
 
 export const withdrawAmount = async (amount, userId) => {
     try {
@@ -13,13 +13,10 @@ export const withdrawAmount = async (amount, userId) => {
       });
   
       if (res.status === 200) {
-        showWithdrawalEmailModal('Withdrawal successful!')
-        window.setTimeout(() => {
-          location.reload(true);
-        }, 2000);
+        location.assign("/confirm-message")
       }
     } catch (error) {
-      showWithdrawalEmailModal(`Error: ${error.response.data.error}`) 
+      showAlert('danger', `Error: ${error.response.data.error}`) 
     }
   };
   

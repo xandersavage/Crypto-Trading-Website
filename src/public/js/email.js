@@ -1,22 +1,23 @@
 import axios from "axios";
-import { showEmailModal } from "./alerts";
+import { showAlert } from "./alerts";
 
 // Function to send email
-export const sendEmail = async (userId) => {
+export const sendEmail = async (userId, amount) => {
     try {
         const res = await axios({
           method: "POST",
           url: "/send-transaction-email",
           data: {
             userId,
+            amount
           }
         });
     
         if (res.status === 200) {
-          showEmailModal('Emails sent successfully');
+          location.assign("/confirm-deposit")
         }
 
-    } catch (e) {
-        showEmailModal(`Error sending email ${e}`);
-    }
+      } catch (e) {
+        showAlert('danger', `Error sending email ${e}`);
+      }
 };

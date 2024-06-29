@@ -73,6 +73,12 @@ const userSchema = mongoose.Schema(
         ref: 'Trader'
       }
     ],
+    transactions: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Transaction'
+      }
+    ],
     avatar: {
       type: String
     }
@@ -82,11 +88,11 @@ const userSchema = mongoose.Schema(
   }
 );
 
-userSchema.virtual("transactions", {
-  ref: "Transaction",
-  localField: "_id",
-  foreignField: "userId"
-});
+// userSchema.virtual("transactions", {
+//   ref: "Transaction",
+//   localField: "_id",
+//   foreignField: "userId"
+// });
 
 // Custom function to find user by email and password
 // N.B :- we use ".statics for create model functions"
