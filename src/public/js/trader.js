@@ -9,6 +9,9 @@ export const addSelectedTrader = async (userId, traderId, userIndex, selectType)
     const res = await axios.post(`/users/${userId}/select-trader/${traderId}`);
     if (res.data) {
         showModal('Trader added!', userIndex, selectType)
+        window.setTimeout(() => {
+          location.reload(true)
+      }, 1500)
         return res.data; // Assuming server returns a success message upon adding the trader
     }
     
@@ -22,6 +25,9 @@ export const removeSelectedTrader = async (userId, traderId, userIndex, selectTy
       const res = await axios.delete(`/users/${userId}/deselect-trader/${traderId}`);
       if (res.data) {
           showModal('Trader removed!', userIndex, selectType)
+          window.setTimeout(() => {
+            location.reload(true)
+        }, 1500)
           return res.data; // Assuming server returns a success message upon adding the trader
       }
       

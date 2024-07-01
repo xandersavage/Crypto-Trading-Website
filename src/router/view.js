@@ -36,6 +36,20 @@ router.get("/account", auth, async(req, res) => {
   }
 });
 
+router.get('/traders', auth, async(req, res) => {
+  try {
+    const traders = await Trader.find()
+    res.status(200).render('traders', {
+      traders,
+      selectedTraders: req.user.selectedTraders.map(trader => trader._id.toString())
+    })
+  } catch (e) {
+    res.status(500).send({
+      error: e
+    })
+  }
+})
+
 router.get("/signup", (req, res) => {
   res.render("signup");
 });

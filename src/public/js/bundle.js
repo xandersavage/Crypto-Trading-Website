@@ -5723,23 +5723,26 @@ var addSelectedTrader = exports.addSelectedTrader = /*#__PURE__*/function () {
         case 3:
           res = _context.sent;
           if (!res.data) {
-            _context.next = 7;
+            _context.next = 8;
             break;
           }
           (0, _alerts.showModal)('Trader added!', userIndex, selectType);
+          window.setTimeout(function () {
+            location.reload(true);
+          }, 1500);
           return _context.abrupt("return", res.data);
-        case 7:
-          _context.next = 12;
+        case 8:
+          _context.next = 13;
           break;
-        case 9:
-          _context.prev = 9;
+        case 10:
+          _context.prev = 10;
           _context.t0 = _context["catch"](0);
           (0, _alerts.showModal)(_context.t0.response.data.error || 'Failed to add trader', userIndex, selectType); // Handle errors
-        case 12:
+        case 13:
         case "end":
           return _context.stop();
       }
-    }, _callee, null, [[0, 9]]);
+    }, _callee, null, [[0, 10]]);
   }));
   return function addSelectedTrader(_x, _x2, _x3, _x4) {
     return _ref.apply(this, arguments);
@@ -5757,23 +5760,26 @@ var removeSelectedTrader = exports.removeSelectedTrader = /*#__PURE__*/function 
         case 3:
           res = _context2.sent;
           if (!res.data) {
-            _context2.next = 7;
+            _context2.next = 8;
             break;
           }
           (0, _alerts.showModal)('Trader removed!', userIndex, selectType);
+          window.setTimeout(function () {
+            location.reload(true);
+          }, 1500);
           return _context2.abrupt("return", res.data);
-        case 7:
-          _context2.next = 12;
+        case 8:
+          _context2.next = 13;
           break;
-        case 9:
-          _context2.prev = 9;
+        case 10:
+          _context2.prev = 10;
           _context2.t0 = _context2["catch"](0);
           (0, _alerts.showModal)(_context2.t0.response.data.error || 'Failed to remove trader', userIndex, selectType); // Handle errors
-        case 12:
+        case 13:
         case "end":
           return _context2.stop();
       }
-    }, _callee2, null, [[0, 9]]);
+    }, _callee2, null, [[0, 10]]);
   }));
   return function removeSelectedTrader(_x5, _x6, _x7, _x8) {
     return _ref2.apply(this, arguments);

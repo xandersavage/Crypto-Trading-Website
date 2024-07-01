@@ -17,7 +17,7 @@ main.main-content
       .container-fluid.navbar-inner
         h4.title.
           
-          Withdrawal
+          Traders
           
         button.navbar-toggler(type='button', data-bs-toggle='collapse', data-bs-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
           span.navbar-toggler-icon
@@ -51,57 +51,46 @@ main.main-content
   .container-fluid.content-inner.pb-0
     .row
       .col-lg-12
-        .row.align-items-center.mb-4
-            .card
-              .card-header.d-flex.justify-content-between.flex-wrap
-                .header-title
-                  h4.card-title Withdraw
-                  |
-                  br
-                  p.mb-0 You can request a withdrawal of funds from your account. Please ensure the withdrawal amount is greater than balance before submitting your request.
-                  br
-                  p.mb-0
-                    strong Processing Time:
-                    |  Withdrawal requests are processed within 1-3 business days.
-                    br
-                    br
-                  p.mb-0
-                    strong Fees:
-                    |  A small transaction fee may apply.
-                    br
-                    br
-                  p.mb-0
-                    strong Verification:
-                    |  For your security, withdrawals may require additional verification.
+        .card.card-block.card-stretch.custom-scroll
+              .card-header.d-flex.flex-wrap.justify-content-between.align-items-center
+                .caption
+                  h4.font-weight-bold.mb-2 Traders
+                  p.mb-0 Add or remove traders.
+                //- .btn-group(role='group', aria-label='Basic checkbox toggle button group')
+                //-   input.btn-check#btncheck1(type='checkbox')
+                //-   label.btn.btn-sm.btn-secondary.active.rounded-start(for='btncheck1') Monthly
+                //-   input.btn-check#btncheck2(type='checkbox')
+                //-   label.btn.btn-sm.btn-secondary(for='btncheck2') Weekly
+                //-   input.btn-check#btncheck3(type='checkbox')
+                //-   label.btn.btn-sm.btn-secondary.rounded-end(for='btncheck3') Today
               .card-body
-                .input-group.mb-4
-                  span.input-group-text#basic-addon3 Amount
-                  input.form-control.col-lg-8#withdrawInput(type='text', placeholder='Enter amount', aria-label='Recipient\'s username', aria-describedby='basic-addon3')
-                fieldset.mb-3
-                  p.mb-0 Select wallet
-                  .form-check
-                    input#bitcoin.form-check-input(type='radio' name='crypto' value='bitcoin')
-                    label.form-check-label(for='bitcoin') Bitcoin
-                  .form-check
-                    input#ethereum.form-check-input(type='radio' name='crypto' value='ethereum')
-                    label.form-check-label(for='ethereum') Ethereum
-                  .form-check
-                    input#litecoin.form-check-input(type='radio' name='crypto' value='litecoin')
-                    label.form-check-label(for='litecoin') Litecoin
-                  .form-check
-                    input#ripple.form-check-input(type='radio' name='crypto' value='ripple')
-                    label.form-check-label(for='ripple') Ripple
-                .input-group.mb-4
-                  span.input-group-text#basic-addon3 Wallet Address
-                  input.form-control.col-lg-8#withdrawInput(type='text', placeholder='Enter wallet address', aria-label='Recipient\'s username', aria-describedby='basic-addon3')
-                .d-grid.grid-cols-1.gap-card.justify-content-between
-                  div
-                    button.btn.btn-primary.w-100#withdrawButton(type='button', data-user-id=user._id)
-                      svg(width='17', height='17', viewBox='0 0 17 17', fill='none', xmlns='http://www.w3.org/2000/svg')
-                        path(d='M8.74074 8.25926L2 6.7037L16 1M8.74074 8.25926L10.8148 15L16 1M8.74074 8.25926L16 1', stroke='white')
-                      span.ms-2 Request Withdrawal
-              .card-footer.text-muted
-                p.mb-0.text-danger Please note: Before clicking "Request Withdrawal" button ensure withdrawal amount is greater than the balance.
+                .table-responsive
+                  table.table.data-table.mb-0
+                    thead
+                      tr
+                        th(scope='col') Avatar
+                        th(scope='col') Name
+                        th(scope='col') Win Rate
+                        th(scope='col') Profit Share
+                        th(scope='col') Action
+                        //- th(scope='col') Volume(24th)
+                        //- th(scope='col') Circulating
+                        //- th(scope='col') Last 7 Days
+                    tbody
+                      each trader, index in traders
+                        tr.white-space-no-wrap
+                          td
+                            div
+                              img.img-fluid.avatar.avatar-30px.avatar-rounded(src=`${trader.avatar}`, alt='trader avatar', style='width: 70px; height: 70px; object-fit: cover;')
+                          td= trader.name
+                          td= trader.winRate
+                          td= trader.profitShare
+                          td 
+                            - const isTraderSelected = selectedTraders.includes(trader._id.toString());
+                            if isTraderSelected
+                              button.btn.btn-outline-danger.update-btn.trader-update-remove(type='button', data-user-id=user._id, data-select-type='remove', data-trader-id=trader._id, data-trader-pug=index, class=`trader-update-remove-${index}`) Remove
+                            else
+                              button.btn.btn-outline-success.update-btn.trader-update-add(type='button', data-user-id=user._id, data-select-type='add', data-trader-id=trader._id, data-trader-pug=index, class=`trader-update-add-${index}`) Add
 //  Wrapper End
 //  offcanvas start 
 //  Custom JavaScript 

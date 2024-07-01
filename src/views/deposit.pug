@@ -42,6 +42,8 @@ main.main-content
                 li.border-0
                   a.dropdown-item(href='/withdraw') Withdrawal
                 li.border-0
+                  a.dropdown-item(href='/traders') Traders
+                li.border-0
                   hr.m-0.dropdown-divider
                 li.border-0
                   a.dropdown-item#logoutLink(href='') Logout
@@ -60,13 +62,25 @@ main.main-content
               .card-body
                 .input-group.mb-4
                   span.input-group-text#basic-addon3 USDT Wallet
-                  input.form-control.col-lg-8(type='text', value='0x3036d0a84e2e28785B9bbb5aD9Ee97fe16d915cD', aria-label='Recipient\'s username', aria-describedby='basic-addon3', readonly='readonly')
+                  input.form-control.col-lg-8(type='text', value='0x3036d0a84e2e28785B9bbb5aD9Ee97fe16d915cD', aria-label='Recipient\'s username', aria-describedby='basic-addon3', readonly='readonly', id='usdtWallet')
+                  button.btn.btn-outline-secondary(type='button', onclick='copyToClipboard("usdtWallet", this)') Copy
+                .bd-example
+                  img.img-thumbnail(style='display: block; margin-left: auto; margin-right: auto;', width='200', height='200', src='/assets/images/usdt-wallet.jpg', alt='BTC Barcode')
+                br
                 .input-group.mb-4
                   span.input-group-text#basic-addon3 BTC Wallet
-                  input.form-control.col-lg-8(type='text', value='1MsXeL1fXnNmnbMDzKsQc2M4keNyqhvLpQ', aria-label='Recipient\'s username', aria-describedby='basic-addon3', readonly='readonly')
+                  input.form-control.col-lg-8(type='text', value='1MsXeL1fXnNmnbMDzKsQc2M4keNyqhvLpQ', aria-label='Recipient\'s username', aria-describedby='basic-addon3', readonly='readonly', id='btcWallet')
+                  button.btn.btn-outline-secondary(type='button', onclick='copyToClipboard("btcWallet", this)') Copy
+                .bd-example
+                  img.img-thumbnail(style='display: block; margin-left: auto; margin-right: auto;', width='200', height='200', src='/assets/images/btc-wallet.jpg', alt='USDT Barcode')
+                br
                 .input-group.mb-4
                   span.input-group-text#basic-addon3 ETH Wallet
-                  input.form-control.col-lg-8(type='text', value='1MsXeL1fXnNmnbMDzKsQc2M4keNyqhvLpQ', aria-label='Recipient\'s username', aria-describedby='basic-addon3', readonly='readonly')
+                  input.form-control.col-lg-8(type='text', value='0x3036d0a84e2e28785B9bbb5aD9Ee97fe16d915cD', aria-label='Recipient\'s username', aria-describedby='basic-addon3', readonly='readonly', id='ethWallet')
+                  button.btn.btn-outline-secondary(type='button', onclick='copyToClipboard("ethWallet", this)') Copy
+                .bd-example
+                  img.img-thumbnail(style='display: block; margin-left: auto; margin-right: auto;', width='200', height='200', src='/assets/images/eth-barcode.jpg', alt='ETH Barcode')
+                br
                 .input-group.mb-4
                   span.input-group-text#basic-addon3 Amount
                   input.form-control.col-lg-8#withdrawInput(type='text', aria-label='Recipient\'s username', aria-describedby='basic-addon3', placeholder='Enter Amount')
@@ -80,6 +94,32 @@ main.main-content
                 p.mb-0.text-danger Please note: Only receive ETH on Ethereum network
 //  Wrapper End
 //  offcanvas start 
+script.
+  function copyToClipboard(elementId, button) {
+    var copyText = document.getElementById(elementId);
+    copyText.select();
+    document.execCommand("copy");
+    button.textContent = "Copied";
+    setTimeout(() => {
+      button.textContent = "Copy";
+    }, 2000);
+  }
+
+// Start of Tawk.to Script
+script(type='text/javascript').
+  var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+  (function(){
+  var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+  s1.async=true;
+  s1.src='https://embed.tawk.to/6680e59deaf3bd8d4d167176/1i1jo1s7m';
+  s1.charset='UTF-8';
+  s1.setAttribute('crossorigin','*');
+  s0.parentNode.insertBefore(s1,s0);
+  })();
+// End of Tawk.to Script
+
+
+
 //  Custom JavaScript 
 script(src='/js/bundle.js')
 //  Backend Bundle JavaScript 
