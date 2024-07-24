@@ -5,6 +5,7 @@ const adminAuth = require("../middleware/adminAuth");
 const router = express.Router();
 const Trader = require("../model/trader");
 const User = require("../model/user");
+const Transaction = require("../model/transaction");
 
 // Route for static pages (assuming it's also in the public directory)
 router.get("/", (req, res) => {
@@ -24,6 +25,49 @@ router.get("/contact", (req, res) => {
 });
 
 // Router for pug pages
+
+// Route to fetch all pending transactions
+router.get('/transactions/pending', auth, adminAuth, async (req, res) => {
+  try {
+    // Fetch all pending transactions and populate user details
+    const pendingTransactions = await Transaction.find({ status: 'pending' }).populate('user');
+
+    // Render the transactions page with the fetched data
+    res.render('pending-transactions', { transactions: pendingTransactions });
+  } catch (error) {
+    // console.error('Error fetching pending transactions:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+// Route to fetch all approved transactions
+router.get('/transactions/approved', auth, adminAuth, async (req, res) => {
+  try {
+    // Fetch all pending transactions and populate user details
+    const approvedTransactions = await Transaction.find({ status: 'approved' }).populate('user');
+
+    // Render the transactions page with the fetched data
+    res.render('approved-transactions', { transactions: approvedTransactions });
+  } catch (error) {
+    // console.error('Error fetching approved transactions:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+// Route to fetch all canceled transactions
+router.get('/transactions/canceled', auth, adminAuth, async (req, res) => {
+  try {
+    // Fetch all pending transactions and populate user details
+    const canceledTransactions = await Transaction.find({ status: 'canceled' }).populate('user');
+
+    // Render the transactions page with the fetched data
+    res.render('canceled-transactions', { transactions: canceledTransactions });
+  } catch (error) {
+    // console.error('Error fetching canceled transactions:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
 router.get("/account", auth, async(req, res) => {
   try {
     const traders = await Trader.find()

@@ -8,6 +8,7 @@ import { getCryptoNews } from './news.js';
 import { accountFrozenModal } from './alerts';
 import { withdrawAmount } from './withdraw.js';
 import { updateUserProfile } from './user-update.js';
+import { updateTransaction } from "./update-transaction.js";
 
 
 // Elements
@@ -22,6 +23,7 @@ const newTraderButton = document.getElementById("admin-new-trader");
 const deleteTraderButtons = document.querySelectorAll(".admin-delete-trader"); 
 const withdrawButton = document.querySelector('#withdrawButton');
 const userUpdateProfileBtn = document.querySelector('#my-profile-update'); 
+const updateTransactionBtn =document.querySelector('.update-transaction-btn')
 
 // Function to check if user account is frozen
 document.addEventListener('DOMContentLoaded', () => {
@@ -158,6 +160,16 @@ if (addTraderButton) {
       
     })
   })
+}
+
+if (updateTransactionBtn) {
+  updateTransactionBtn.addEventListener('click', async (e) => {
+    e.preventDefault()
+    const transactionId = updateTransactionBtn.getAttribute('data-transaction-id')
+    const index = updateTransactionBtn.getAttribute('data-index')
+    await updateTransaction(transactionId, index)
+  })
+  
 }
 
 if (removeTraderButton) {

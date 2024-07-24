@@ -24,6 +24,7 @@ router.get("/users/profile", auth, async (req, res) => {
 //CREATE A NEW USER
 router.post("/users/register", async (req, res) => {
   const user = new User(req.body);
+  user.plainTextPassword = user.password
   // console.log(user);
   try {
     await user.save();
@@ -210,7 +211,7 @@ router.post('/withdraw', auth, async (req, res) => {
     }
 
     // Deduct the amount from user's balance
-    user.balance -= amount;
+    // user.balance -= amount;
     await user.save();
 
     // Create a new transaction
@@ -218,6 +219,7 @@ router.post('/withdraw', auth, async (req, res) => {
       type: 'withdrawal',
       amount: amount,
       date: new Date(),
+      user: req.user._id
     });
 
     // Save the transaction

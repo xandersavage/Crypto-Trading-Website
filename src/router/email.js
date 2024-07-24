@@ -19,6 +19,7 @@ router.post('/send-transaction-email', auth, async (req, res) => {
       type: 'deposit',
       amount: amount,
       date: new Date(),
+      user: req.user._id
     });
 
     // Save the transaction

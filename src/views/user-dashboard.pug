@@ -478,12 +478,18 @@ main.main-content
                               h5.mb-2 Deposit
                               p.text-success.mb-2 +$#{transaction.amount}
                               p.fs-6 Deposit of $#{transaction.amount} on #{transaction.date}
+                              div
+                                img.img-fluid.avatar.avatar-30.avatar-rounded(src=`/assets/images/utilities/${transaction.status}.png`, alt='img52')
+                                p.fs-6(style='display:inline;') #{transaction.status}
                               //- div
                               //-   p #{transaction.date}
                             else if transaction.type === 'withdrawal'
                               h5.mb-2 Withdrawal
                               p.text-danger.mb-2 -$#{transaction.amount}
                               p.fs-6 Withdrawal of $#{transaction.amount} on #{transaction.date}
+                              div
+                                img.img-fluid.avatar.avatar-30.avatar-rounded(src=`/assets/images/utilities/${transaction.status}.png`, alt='img52')
+                                p.fs-6(style='display:inline;') #{transaction.status}
                               //- div
                               //-   p #{transaction.date}
                 else

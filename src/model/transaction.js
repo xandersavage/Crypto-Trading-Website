@@ -11,6 +11,11 @@ const formatDate = (date) => {
   return date.toLocaleDateString('en-US', options);
 };
 
+// Helper function to parse amount back to a number
+const parsedAmount = (formattedAmount) => {
+  return Number(formattedAmount.replace(/[^0-9.-]+/g, ""))
+} 
+
 const transactionSchema = new mongoose.Schema({
   type: {
     type: String,
@@ -20,13 +25,23 @@ const transactionSchema = new mongoose.Schema({
   amount: {
     type: String, // Store the formatted amount as a string
     required: true,
-    get: formatAmount,
+    get: parsedAmount,
     set: formatAmount
+  },
+  status: {
+    type: String,
+    default: 'pending',
+    required: true
   },
   date: {
     type: String, // Store the formatted date as a string
     required: true,
     default: () => formatDate(new Date())
+  },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
   }
 });
 

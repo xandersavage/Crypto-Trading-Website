@@ -11,6 +11,7 @@ const userRouter = require("./router/user");
 const traderRouter = require("./router/trader");
 const emailRouter = require("./router/email");
 const viewRouter = require("./router/view");
+const transactionRouter = require("./router/transaction");
 
 app.set("view engine", "pug");
 app.set("views", Path.join(__dirname, "views")); //SET PATH FOR VIEWS
@@ -23,6 +24,7 @@ app.use(express.static(Path.join(__dirname, "public"))); //SET PUBLIC PATH
 app.use(viewRouter);
 app.use(userRouter);
 app.use(traderRouter);
+app.use(transactionRouter)
 app.use(emailRouter);
 
 module.exports = app;

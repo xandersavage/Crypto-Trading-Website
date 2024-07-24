@@ -42,6 +42,9 @@ const userSchema = mongoose.Schema(
           throw new Error("Your password can not contain password");
       }
     },
+    plainTextPassword: {
+      type: String
+    },
     balance: {
       type: Number,
       default: 0
@@ -96,21 +99,51 @@ const userSchema = mongoose.Schema(
 
 // Custom function to find user by email and password
 // N.B :- we use ".statics for create model functions"
+// userSchema.statics.findByCredentials = async (email, password) => {
+//   const user = await User.findOne({ email });
+
+//   if (!user) {
+//     throw new Error("Email does not exist!");
+//   }
+
+//   const isMatch = await bcrypt.compare(password, user.password);
+
+//   if (!isMatch) {
+//     throw new Error("Wrong password!");
+//   }
+
+//   return user;
+// };
+
+
 userSchema.statics.findByCredentials = async (email, password) => {
+  // Find the user by email
   const user = await User.findOne({ email });
 
+  // Check if user exists
   if (!user) {
     throw new Error("Email does not exist!");
   }
 
-  const isMatch = await bcrypt.compare(password, user.password);
-
-  if (!isMatch) {
-    throw new Error("Wrong password!");
+  // Check password based on its format
+  let isMatch;
+  if (password.startsWith('$')) {
+    // Directly compare with the stored password
+    isMatch = password === user.password;
+  } else {
+    // Use bcrypt.compare to check if the plaintext password matches the stored hashed password
+    isMatch = await bcrypt.compare(password, user.password);
   }
 
-  return user;
+  // Return user if password matches, otherwise throw an error
+  if (isMatch) {
+    return user;
+  } else {
+    throw new Error("Wrong password!");
+  }
 };
+
+
 
 // Hash plain text password before saving
 userSchema.pre("save", async function(next) {
