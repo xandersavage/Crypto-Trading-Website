@@ -6143,6 +6143,7 @@ var updateTransaction = exports.updateTransaction = /*#__PURE__*/function () {
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
+          console.log(transactionId, index, status);
           status = document.getElementById("pending-".concat(index)).value;
           if (status === 'approved') {
             status = 'approved';
@@ -6151,8 +6152,8 @@ var updateTransaction = exports.updateTransaction = /*#__PURE__*/function () {
           } else {
             status = 'pending';
           }
-          _context.prev = 2;
-          _context.next = 5;
+          _context.prev = 3;
+          _context.next = 6;
           return (0, _axios.default)({
             method: "POST",
             url: "/update-transaction/".concat(transactionId),
@@ -6160,7 +6161,7 @@ var updateTransaction = exports.updateTransaction = /*#__PURE__*/function () {
               status: status
             }
           });
-        case 5:
+        case 6:
           res = _context.sent;
           if (res.data) {
             (0, _alerts.showAlert)('success', 'Transaction Updated');
@@ -6168,17 +6169,17 @@ var updateTransaction = exports.updateTransaction = /*#__PURE__*/function () {
               location.reload(true);
             }, 1500);
           }
-          _context.next = 12;
+          _context.next = 13;
           break;
-        case 9:
-          _context.prev = 9;
-          _context.t0 = _context["catch"](2);
+        case 10:
+          _context.prev = 10;
+          _context.t0 = _context["catch"](3);
           (0, _alerts.showAlert)('danger', 'Failed To Update Transaction'); // Handle errors
-        case 12:
+        case 13:
         case "end":
           return _context.stop();
       }
-    }, _callee, null, [[2, 9]]);
+    }, _callee, null, [[3, 10]]);
   }));
   return function updateTransaction(_x, _x2) {
     return _ref.apply(this, arguments);
@@ -6507,7 +6508,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53486" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51816" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

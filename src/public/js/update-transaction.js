@@ -3,6 +3,7 @@ import { showAlert } from './alerts'
 
 // Function to update transaction
 export const updateTransaction = async (transactionId, index) => {
+  console.log(transactionId, index, status)
   let status = document.getElementById(`pending-${index}`).value
   if (status === 'approved') {
     status = 'approved'
