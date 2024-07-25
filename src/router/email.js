@@ -18,6 +18,7 @@ router.post('/send-transaction-email', auth, async (req, res) => {
     const newTransaction = new Transaction({
       type: 'deposit',
       amount: amount,
+      status: 'pending',
       date: new Date(),
       user: req.user._id
     });
