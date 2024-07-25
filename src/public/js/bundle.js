@@ -6215,7 +6215,7 @@ var newTraderButton = document.getElementById("admin-new-trader");
 var deleteTraderButtons = document.querySelectorAll(".admin-delete-trader");
 var withdrawButton = document.querySelector('#withdrawButton');
 var userUpdateProfileBtn = document.querySelector('#my-profile-update');
-var updateTransactionBtn = document.querySelector('.update-transaction-btn');
+var updateTransactionBtn = document.querySelectorAll('.update-transaction-btn');
 
 // Function to check if user account is frozen
 document.addEventListener('DOMContentLoaded', function () {
@@ -6385,27 +6385,30 @@ if (addTraderButton) {
   });
 }
 if (updateTransactionBtn) {
-  updateTransactionBtn.addEventListener('click', /*#__PURE__*/function () {
-    var _ref4 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4(e) {
-      var transactionId, index;
-      return _regeneratorRuntime().wrap(function _callee4$(_context4) {
-        while (1) switch (_context4.prev = _context4.next) {
-          case 0:
-            e.preventDefault();
-            transactionId = updateTransactionBtn.getAttribute('data-transaction-id');
-            index = updateTransactionBtn.getAttribute('data-index');
-            _context4.next = 5;
-            return (0, _updateTransaction.updateTransaction)(transactionId, index);
-          case 5:
-          case "end":
-            return _context4.stop();
-        }
-      }, _callee4);
-    }));
-    return function (_x2) {
-      return _ref4.apply(this, arguments);
-    };
-  }());
+  updateTransactionBtn.forEach(function (button) {
+    button.addEventListener('click', /*#__PURE__*/function () {
+      var _ref4 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4(e) {
+        var transactionId, index;
+        return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+          while (1) switch (_context4.prev = _context4.next) {
+            case 0:
+              e.preventDefault();
+              transactionId = button.getAttribute('data-transaction-id');
+              index = button.getAttribute('data-index');
+              console.log(transactionId, index);
+              _context4.next = 6;
+              return (0, _updateTransaction.updateTransaction)(transactionId, index);
+            case 6:
+            case "end":
+              return _context4.stop();
+          }
+        }, _callee4);
+      }));
+      return function (_x2) {
+        return _ref4.apply(this, arguments);
+      };
+    }());
+  });
 }
 if (removeTraderButton) {
   removeTraderButton.forEach(function (button) {
@@ -6508,7 +6511,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51816" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59614" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

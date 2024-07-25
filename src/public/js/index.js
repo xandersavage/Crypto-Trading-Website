@@ -23,7 +23,7 @@ const newTraderButton = document.getElementById("admin-new-trader");
 const deleteTraderButtons = document.querySelectorAll(".admin-delete-trader"); 
 const withdrawButton = document.querySelector('#withdrawButton');
 const userUpdateProfileBtn = document.querySelector('#my-profile-update'); 
-const updateTransactionBtn =document.querySelector('.update-transaction-btn')
+const updateTransactionBtn =document.querySelectorAll('.update-transaction-btn')
 
 // Function to check if user account is frozen
 document.addEventListener('DOMContentLoaded', () => {
@@ -163,13 +163,15 @@ if (addTraderButton) {
 }
 
 if (updateTransactionBtn) {
-  updateTransactionBtn.addEventListener('click', async (e) => {
+  updateTransactionBtn.forEach(button => {
+    button.addEventListener('click', async (e) => {
     e.preventDefault()
-    const transactionId = updateTransactionBtn.getAttribute('data-transaction-id')
-    const index = updateTransactionBtn.getAttribute('data-index')
+    const transactionId = button.getAttribute('data-transaction-id')
+    const index = button.getAttribute('data-index')
+    console.log(transactionId, index)
     await updateTransaction(transactionId, index)
-  })
-  
+  }) 
+  }) 
 }
 
 if (removeTraderButton) {
