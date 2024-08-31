@@ -3,6 +3,9 @@ const User = require('../model/user');
 const Transaction = require('../model/transaction');
 const auth = require('../middleware/auth');
 const adminAuth = require("../middleware/adminAuth");
+const {generateDepositApprovedEmail, generateWithdrawalApprovedEmail,
+      sendEmail, generateDepositDeclinedEmail, generateWithdrawalDeclinedEmail
+} = require('../emails/account')
 const router = express.Router();
 
 // Route to update transaction status to "approved"
@@ -24,15 +27,37 @@ router.post('/update-transaction/:transactionId', auth, adminAuth, async (req, r
     // Update the transaction status
     transaction.status = status
 
-    // Update the user balance id the transaction is approved
+    // Update the user balance if the transaction is approved
     if (status === 'approved') {
       const amount = transaction.amount
       
       if(transaction.type === 'deposit') {
         transaction.user.balance += amount
+
+        // Send emails
+        const userMessage = generateDepositApprovedEmail(transaction.user.firstName, transaction.user.lastName, transaction.amount);
+        await sendEmail(transaction.user.email, "Deposit approved" ,userMessage); //user email
+
       } else if (transaction.type === 'withdrawal') {
         transaction.user.balance -= amount
+
+        // Send emails
+        const userMessage = generateWithdrawalApprovedEmail(transaction.user.firstName, transaction.user.lastName, transaction.amount);
+        await sendEmail(transaction.user.email, "Withdrawal Approved" ,userMessage); //user email
       }
+    } else if (status === 'canceled') {
+        if (transaction.type === 'deposit') {
+          // Send deposit declined email
+          const userMessage = generateDepositDeclinedEmail(transaction.user.firstName, 
+            transaction.user.lastName, transaction.amount);
+          await sendEmail(transaction.user.email, "Deposit Declined!" ,userMessage); //user email
+        } else if (transaction.type === 'withdrawal') {
+          // Send withdrawal declined email
+          const userMessage = generateWithdrawalDeclinedEmail(transaction.user.firstName, 
+            transaction.user.lastName, transaction.amount);
+          await sendEmail(transaction.user.email, "Deposit Declined!" ,userMessage); //user email
+        }
+      
     }
 
     // Save the updated transaction

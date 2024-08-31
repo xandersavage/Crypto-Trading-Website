@@ -1,7 +1,7 @@
 const express = require('express');
 const User = require('../model/user')
 const Transaction = require('../model/transaction')
-const { sendEmail, generateUserEmail, generateSupportEmail } = require('../emails/account')
+const { sendEmail, generateDepositUserEmail, generateDepositSupportEmail } = require('../emails/account')
 const auth = require('../middleware/auth')
 const router = express.Router();
 
@@ -30,12 +30,13 @@ router.post('/send-transaction-email', auth, async (req, res) => {
     user.transactions.push(newTransaction);
     await user.save();
 
-    // const userMessage = generateUserEmail(user.firstName, user.lastName);
-    // const adminMessage = generateSupportEmail(user.firstName, user.lastName, user.email);
+    const userMessage = generateDepositUserEmail(user.firstName, user.lastName);
+    const adminMessage = generateDepositSupportEmail(user.firstName, user.lastName, 
+                          newTransaction.amount, user.email);
 
     // Send emails
-    // await sendEmail(user.email, "Payment Received and Processing" ,userMessage); //user email
-    // await sendEmail("xanderarts99@gmail.com", "User Payment Notification", adminMessage); // support email
+    await sendEmail(user.email, "Payment Received and Processing" ,userMessage); //user email
+    await sendEmail("support@coinblazers.com", "User Payment Notification", adminMessage); // support email
 
     res.status(200).send({ message: 'Emails sent successfully' });
   } catch (error) {

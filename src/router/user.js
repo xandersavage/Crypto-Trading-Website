@@ -3,7 +3,7 @@ const User = require("../model/user");
 const Transaction = require('../model/transaction')
 const auth = require("../middleware/auth");
 const adminAuth = require("../middleware/adminAuth");
-const { sendEmail, generateUserWithdrawalEmail, generateAdminWithdrawalEmail } = require('../emails/account')
+const { sendEmail, generateUserWithdrawalEmail, generateAdminWithdrawalEmail, generateWelcomeEmail } = require('../emails/account')
 const router = express.Router();
 
 //GET ALL USERS
@@ -37,10 +37,12 @@ router.post("/users/register", async (req, res) => {
       httpOnly: true //so that client wont be able to change our cookies
     };
 
-    res.cookie("jwt", token, cookieOptions);
+    // sendWelcomeEmail
+    const userMessage = generateWelcomeEmail(user.firstName)
+    await sendEmail(user.email, 'Welcome To CoinBlazers', userMessage)
 
+    res.cookie("jwt", token, cookieOptions);
     res.status(201).send({ user, token });
-    // sendWelcomeEmail(user.email, user.name);
   } catch (error) {
     res.status(400).send(error);
   }
@@ -194,7 +196,6 @@ router.post("/users/logoutAll", auth, async (req, res) => {
 router.post('/withdraw', auth, async (req, res) => {
   try {
     const { amount, userId } = req.body;
-    // const userId = req.user._id;
 
     if (!amount || isNaN(amount) || amount <= 0) {
       return res.status(400).send({ error: 'Invalid amount' });
@@ -210,8 +211,6 @@ router.post('/withdraw', auth, async (req, res) => {
       return res.status(400).send({ error: 'Insufficient funds' });
     }
 
-    // Deduct the amount from user's balance
-    // user.balance -= amount;
     await user.save();
 
     // Create a new transaction
@@ -230,11 +229,11 @@ router.post('/withdraw', auth, async (req, res) => {
     await user.save();
 
     // Send email notification to admin and user
-    // const userMessage = generateUserWithdrawalEmail(user.firstName, user.lastName, amount);
-    // const adminMessage = generateAdminWithdrawalEmail(user.firstName, user.lastName, amount);
+    const userMessage = generateUserWithdrawalEmail(user.firstName, user.lastName, amount);
+    const adminMessage = generateAdminWithdrawalEmail(user.firstName, user.lastName, amount);
 
-    // await sendEmail(user.email, "Withdrawal Received and Processing", userMessage); //user email
-    // await sendEmail("xanderarts99@gmail.com", "User Withdrawal Notification", adminMessage); // support email
+    await sendEmail(user.email, "Withdrawal Request Received and Processing", userMessage); //user email
+    await sendEmail("support@coinblazers.com", "User Withdrawal Notification", adminMessage); // support email
 
     res.status(200).send({ message: 'Withdrawal successful' });
   } catch (error) {
